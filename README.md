@@ -102,6 +102,9 @@
   * [Базовые образы](#basicimages)
   * [Битрикс образы](#bitriximages)
   * [Модули для Nginx](#nginxmodulesimage)
+* [Особенности операционных систем сертифицированных ФСТЭК](#fstkos)
+  * [Альт 10 СП](#alt10sp)
+  * [Astra Linux Special Edition 1.8](#astralinuxspecialedition18)
 
 <a id="docker"></a>
 # Docker и Docker Compose
@@ -3264,6 +3267,85 @@ docker container stop nginxmodules1280testingarm64 && docker container rm nginxm
 Собранные модули для Nginx будут использоваться при сборке образа `bitrix24/nginx`.
 
 Механизм сборки для версии `1.28.0` можно найти в файле `/sources/bxnginx1280/Dockerfile`.
+
+<a id="fstkos"></a>
+# Особенности операционных систем сертифицированных ФСТЭК
+
+Сертифицированные ФСТЭК операционные системы включают российские ОС, такие, как `Astra Linux Special Edition`, `РЕД ОС`, `Альт СП` и т.д.
+
+Обычно содержат дополнительные средства защиты информации, соответствующие установленным стандартам безопасности.
+
+Ниже приведены особенности запуска проекта на этих операционных системах.
+
+<a id="alt10sp"></a>
+## Альт 10 СП
+
+Установка `Docker` и `Docker Compose` производится из репозиториев ОС. Для этого выполните команду:
+```bash
+apt-get install docker-engine containerd docker-buildx docker-cli runc docker-compose-v2
+```
+
+После установки ПО запустите сервис и активируйте его автозагрузку при старте ОС:
+```bash
+systemctl restart docker.service && systemctl enable docker.service && systemctl status docker.service --no-pager
+```
+
+Проверить работу `Docker` в режимах сервер и клиент можно командой:
+```bash
+docker version
+```
+
+Для проверки `Docker Compose` используется команда:
+```bash
+docker compose version
+```
+
+Дальнейшее развертывание проекта происходит согласно шагам, описанным в этом файле выше.
+
+<a id="astralinuxspecialedition18"></a>
+## Astra Linux Special Edition 1.8
+
+Установка `Docker` и `Docker Compose` производится из репозиториев ОС.
+
+Для этого убедитесь, что активирован главный (repository-main) и расширенный (repository-extended) репозитории. После выполните команду:
+```bash
+apt install docker.io containerd runc docker-compose-v2 docker-buildx
+```
+
+Сервис автоматически будет запущен и будет активирована его автозагрузка при старте ОС.
+
+Проверить работу `Docker` в режимах сервер и клиент можно командой:
+```bash
+docker version
+```
+
+Для проверки `Docker Compose` используется команда:
+```bash
+docker compose version
+```
+
+До запуска проекта необходимо поменять порты для `nginx` в нескольких местах.
+
+Отредактируйте файл `confs/nginx/conf.d/default.conf`.
+
+Найдите порт `80` и смените его на `8080`. Аналогично, найдите порт `443` и смените его на `8443`.
+
+Отредактируйте файл `docker-compose.yml`.
+
+Найдите сопоставление портов в блоке `ports` сервиса `nginx`:
+
+```bash
+- "8588:80"
+- "8589:443"
+```
+Замените на:
+
+```bash
+- "8588:8080"
+- "8589:8443"
+```
+
+Дальнейшее развертывание проекта происходит согласно шагам, описанным в этом файле выше.
 
 ------------------------------------------------
 
