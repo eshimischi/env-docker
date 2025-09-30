@@ -2944,7 +2944,7 @@ docker compose up -d
 <a id="postgresqlalternativeversions"></a>
 ### PostgreSQL
 
-Доступные альтернативные версии PostgreSQL: `14.x`, `15.x`, `17.x`.
+Доступные альтернативные версии PostgreSQL: `14.x`, `15.x`, `17.x`, `18.x`.
 
 Разберем пример использования версии `17.x` вместо текущей версии `16.x`.
 
@@ -2954,6 +2954,7 @@ docker compose up -d
 #image: postgres:15.14-bookworm
 #image: postgres:16.10-bookworm
 image: postgres:17.6-bookworm
+#image: postgres:18.0-bookworm
 ```
 
 Запускаем все контейнеры, оставляем их работать в фоне:
@@ -2961,9 +2962,9 @@ image: postgres:17.6-bookworm
 docker compose up -d
 ```
 
-Таким образом PostgreSQL будет использовать контейнер с версией `17.5`.
+Таким образом PostgreSQL будет использовать контейнер с версией `17.6`.
 
-Для версий `14.x` или `15.x` настройку выполняем аналогичные образом.
+Для версий `14.x`, `15.x`, `18.x` настройку выполняем аналогичные образом.
 
 <a id="mysqlalternativeversions"></a>
 ### MySQL
