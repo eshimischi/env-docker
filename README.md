@@ -3061,7 +3061,7 @@ docker pull memcached:1.6.39-alpine
 - веб-сервер:
   - используем стабильный образ `nginx:1.28.0-alpine-slim`
   - добавляем модули слоем сверху
-  - собираем `bitrix24/nginx:1.28.0-v2-alpine`
+  - собираем `bitrix24/nginx:1.28.0-v3-alpine`
 - интерпретатор PHP-кода:
   - готового совместимого образа PHP нет
   - берем по умолчанию образ `php:8.2.29-fpm-alpine` / `php:8.3.26-fpm-alpine` / `php:8.4.13-fpm-alpine` и добавляем то, что нам надо через пару слоев сверху
@@ -3139,7 +3139,7 @@ docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Doc
 - `bitrix24/nginx`:
 ```bash
 cd env-docker/sources/bxnginx1280/
-docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t bitrix24/nginx:1.28.0-v2-alpine --no-cache .
+docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t bitrix24/nginx:1.28.0-v3-alpine --no-cache .
 ```
 
 - `bitrix24/percona-server` для версии `8.0.x`:
@@ -3201,25 +3201,25 @@ docker pull nginx:1.28.0-alpine-slim
 
 Скачиваем файл для версии 1.28.0 по ссылке: [https://github.com/nginx/docker-nginx/blob/7f1d49f6f222f7e588a9066fd53a0ce43c3466a5/stable/alpine/Dockerfile](https://github.com/nginx/docker-nginx/blob/7f1d49f6f222f7e588a9066fd53a0ce43c3466a5/stable/alpine/Dockerfile)
 
-Модифицируем файл, добавляем нужные модули по списку выше и служебную часть. Пример всех изменений файла для версии 1.28.0 можно найти в папке `/sources/bxnginx1280modules/v2/`.
+Модифицируем файл, добавляем нужные модули по списку выше и служебную часть. Пример всех изменений файла для версии 1.28.0 можно найти в папке `/sources/bxnginx1280modules/v3/`.
 
 Запускаем сборку образа `nginx_modules`, указываем две архитектуры `amd64` и `arm64` в команде:
 
 ```bash
-cd env-docker/sources/bxnginx1280modules/v2/
-docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t nginx_modules:1.28.0-v2-alpine --no-cache .
+cd env-docker/sources/bxnginx1280modules/v3/
+docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t nginx_modules:1.28.0-v3-alpine --no-cache .
 ```
 
 После нужно запустить два контейнера, используя собранный образ выше. По одному для каждой архитектуры: `amd64` и `arm64`.
 
 Для `amd64` выполняем команду:
 ```bash
-docker run --platform=linux/amd64 -d --name=nginxmodules1280testingamd64 -it nginx_modules:1.28.0-v2-alpine
+docker run --platform=linux/amd64 -d --name=nginxmodules1280testingamd64 -it nginx_modules:1.28.0-v3-alpine
 ```
 
 Для `arm64` выполняем команду:
 ```bash
-docker run --platform=linux/arm64 -d --name=nginxmodules1280testingarm64 -it nginx_modules:1.28.0-v2-alpine
+docker run --platform=linux/arm64 -d --name=nginxmodules1280testingarm64 -it nginx_modules:1.28.0-v3-alpine
 ```
 
 Собранные модули Nginx будут доступны в каталоге `/root/packages/` у каждого запущенного контейнера.
