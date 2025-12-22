@@ -52,7 +52,7 @@ RUN docker-php-ext-configure gd --with-avif --with-freetype --with-jpeg --with-x
 
 RUN docker-php-ext-install mysqli pdo_mysql bz2 pgsql pdo_pgsql zip gd opcache ldap exif intl calendar sodium gettext pspell xml xmlwriter xsl shmop sysvmsg sysvsem sysvshm sockets memcache memcached apcu mcrypt msgpack igbinary redis xhprof xdebug amqp ssh2 imagick
 
-FROM php:8.3.30-fpm-alpine3.22 AS production
+FROM php:8.3.29-fpm-alpine3.22 AS production
 
 USER root
 
