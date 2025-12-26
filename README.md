@@ -3110,7 +3110,7 @@ docker pull goacme/lego:v4.30.1
 
 - `bitrix24/sphinx`:
 ```bash
-cd env-docker/sources/bxsphinx2211/
+cd env-docker/sources/bxsphinx2211/v1/
 docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t bitrix24/sphinx:2.2.11-v1-alpine --no-cache .
 ```
 
