@@ -267,7 +267,7 @@ services:
     depends_on:
       - redis
   sphinx:
-    image: quay.io/bitrix24/sphinx:2.2.11-v1-alpine
+    image: quay.io/bitrix24/sphinx:2.2.11-v2-alpine
     container_name: dev_sphinx
 #    ports:
 #      - "9306:9306"
