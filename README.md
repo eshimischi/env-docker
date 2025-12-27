@@ -3081,7 +3081,7 @@ docker pull memcached:1.6.40-alpine
   - собираем `bitrix24/lego:4.30.1-v1-alpine`
 - генератор самоподписных SSL-сертификатов:
   - небольшой образ с пакетами на базе `Alpine Linux`
-  - собираем `bitrix24/ssl:1.0-v1-alpine`
+  - собираем `bitrix24/ssl:1.1-v1-alpine`
 
 Список официальных Docker образов, которые будем брать с [DockerHub](https://hub.docker.com/):
 - `Percona Server`: https://hub.docker.com/r/percona/percona-server
@@ -3164,8 +3164,8 @@ docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Doc
 
 - `bitrix24/ssl`:
 ```bash
-cd env-docker/sources/bxssl10/
-docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t bitrix24/ssl:1.0-v1-alpine --no-cache .
+cd env-docker/sources/bxssl11/
+docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t bitrix24/ssl:1.1-v1-alpine --no-cache .
 ```
 
 Во всех образах `bitrix24` в названии тега указывается `v1`, состоит из:
