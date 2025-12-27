@@ -2977,7 +2977,7 @@ docker compose up -d
 До первого запуска проекта редактируем файл `docker-compose.yml`, в разделе `services` находим сервис `mysql`. В строку с текущей версией `8.0.x` добавляем `#`, в строке с версией `8.4.x` убираем `#`. Итоговый вид:
 ```bash
 #image: quay.io/bitrix24/percona-server:8.0.44-v1-rhel
-image: quay.io/bitrix24/percona-server:8.4.6-v1-rhel
+image: quay.io/bitrix24/percona-server:8.4.7-v1-rhel
 ```
 
 Запускаем все контейнеры, оставляем их работать в фоне:
@@ -2985,7 +2985,7 @@ image: quay.io/bitrix24/percona-server:8.4.6-v1-rhel
 docker compose up -d
 ```
 
-Таким образом MySQL будет использовать контейнер с версией `8.4.6`.
+Таким образом MySQL будет использовать контейнер с версией `8.4.7`.
 
 <a id="phpandcronalternativeversions"></a>
 ### PHP и Cron
@@ -3056,9 +3056,9 @@ docker pull memcached:1.6.40-alpine
 
 Также нам понадобятся:
 - база данных MySQL:
-  - используем стабильный образ `percona/percona-server:8.0.44` / `percona/percona-server:8.4.6`
+  - используем стабильный образ `percona/percona-server:8.0.44` / `percona/percona-server:8.4.7`
   - добавляем слоем сверху конфигурацию бд
-  - собираем `bitrix24/percona-server:8.0.44-v1-rhel` / `bitrix24/percona-server:8.4.6-v1-rhel`
+  - собираем `bitrix24/percona-server:8.0.44-v1-rhel` / `bitrix24/percona-server:8.4.7-v1-rhel`
 - веб-сервер:
   - используем стабильный образ `nginx:1.28.0-alpine-slim`
   - добавляем модули слоем сверху
@@ -3094,7 +3094,7 @@ docker pull memcached:1.6.40-alpine
 Для сборки нам понадобятся следующие образы (их можно предварительно скачать, используя команды):
 ```bash
 docker pull percona/percona-server:8.0.44
-docker pull percona/percona-server:8.4.6
+docker pull percona/percona-server:8.4.7
 docker pull nginx:1.28.0-alpine-slim
 docker pull php:8.2.29-fpm-alpine
 docker pull php:8.3.28-fpm-alpine3.21
@@ -3152,8 +3152,8 @@ docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Doc
 
 - `bitrix24/percona-server` для версии `8.4.x`:
 ```bash
-cd env-docker/sources/bxpercona846/
-docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t bitrix24/percona-server:8.4.6-v1-rhel --no-cache .
+cd env-docker/sources/bxpercona847/
+docker buildx build --platform linux/arm64,linux/amd64 --provenance=false -f Dockerfile -t bitrix24/percona-server:8.4.7-v1-rhel --no-cache .
 ```
 
 - `bitrix24/lego`:
