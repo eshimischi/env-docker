@@ -15,7 +15,7 @@ RUN apk add --no-cache --virtual .build-deps \
     bzip2-dev \
     postgresql17-dev \
     zip libzip libzip-dev \
-    freetype freetype-dev libpng libpng-dev libjpeg-turbo libjpeg-turbo-dev libxpm libxpm-dev libwebp libwebp-dev \
+    freetype freetype-dev libpng libpng-dev libjpeg-turbo libjpeg-turbo-dev libxpm libxpm-dev libwebp libwebp-dev libavif libavif-dev \
     openldap-dev libldap libsasl cyrus-sasl-dev \
     gettext gettext-dev \
     aspell-dev \
@@ -46,7 +46,7 @@ RUN docker-php-source extract && \
     cp -fr /usr/src/php/ext/igbinary /usr/local/include/php/ext/igbinary && \
     cp -fr /usr/src/php/ext/msgpack /usr/local/include/php/ext/msgpack
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg --with-xpm --with-webp && \
+RUN docker-php-ext-configure gd --with-avif --with-freetype --with-jpeg --with-xpm --with-webp && \
     docker-php-ext-configure opcache --enable-opcache && \
     docker-php-ext-configure redis --enable-redis-igbinary --enable-redis-msgpack --enable-redis-lzf --enable-redis-zstd
 
@@ -69,7 +69,7 @@ COPY msmtprc /opt/msmtp/.msmtprc
 
 RUN docker-php-source delete && \
     apk add --no-cache -X http://dl-cdn.alpinelinux.org/alpine/edge/testing catdoc && \
-    apk add --no-cache msmtp curl openssl ca-certificates tzdata poppler-utils aspell bzip2 gettext libmcrypt libldap libsasl cyrus-sasl libmemcached libmemcached-libs icu-libs libxslt freetype libpng libjpeg-turbo libxpm libwebp libgomp zip libzip libxml2 lz4 liblzf zstd libpq rabbitmq-c libssh2 imagemagick && \
+    apk add --no-cache msmtp curl openssl ca-certificates tzdata poppler-utils aspell bzip2 gettext libmcrypt libldap libsasl cyrus-sasl libmemcached libmemcached-libs icu-libs libxslt freetype libpng libjpeg-turbo libxpm libwebp libavif libgomp zip libzip libxml2 lz4 liblzf zstd libpq rabbitmq-c libssh2 imagemagick && \
     curl -fsSL https://getcomposer.org/download/latest-stable/composer.phar -o composer.phar && \
     chmod +x composer.phar && \
     mv composer.phar /usr/local/bin/composer && \
